@@ -1,0 +1,179 @@
+﻿
+@{
+
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+
+@section style{
+
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            margin-top: 50px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .table-dl th,
+        .table-dl td {
+            font-size: 12px;
+        }
+
+        .table-dl td {
+            padding: 10px;
+        }
+
+        .table-dl th {
+            background: #5abccc;
+            color: #fff;
+            text-align: center;
+        }
+
+        .wrapper-display-table {
+            padding: 10px;
+        }
+
+        .scroll-view {
+            margin-top: 20px;
+            height: 700px;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #999999;
+            overflow: auto;
+            padding: 20px;
+            background: #ecece9;
+        }
+
+        span.error{
+            color: red;
+        }
+    </style>
+}
+@section scripts{
+    <script>
+        $(function () {
+            $('#input_file').change(function () {
+                $('#form_upload').submit();
+            });
+
+            $('.sl-name').change(function () {
+                var sl = $(this);
+
+                var table = $('#table-sl');
+                //var selects = table.find('tbody tr td select.sl-name option[value="' + sl.val() + '"]').not(':selected');
+                //$.each(selects, function (key, item) {
+                //    $(item).remove();
+                //})
+
+                var array = Array.from(table.find('tbody tr td select.sl-name').not(this)).map(x => $(x).val());
+
+                if (sl.val() !== '') {
+
+                    if (array.includes(sl.val())) {
+                        sl.parent().find('span.error').remove();
+                        sl.parent().append("<span class='error'>Ten cot da duoc chon.</span>");
+                    } else {
+
+                        sl.parent().find('span.error').remove();
+                    }
+
+                } else {
+                    sl.parent().find('span.error').remove();
+                }
+            });
+
+            $('#btn_submit_process').click(function () {
+                var table = $('#table-sl');
+                if (table.find('tbody tr td span.error').length > 0) {
+                    return;
+                }
+
+                var array = Array.from(table.find('tbody tr td select.sl-name')).map(x => $(x).val());
+                if (array.every(x => x === '')) {
+                    return;
+                }
+                $('#form_json').submit();
+            });
+        })
+    </script>
+}
+<div class="wrapper">
+    <div class="row">
+        @if (ViewData.Model == null)
+        {
+            <div class="col-lg-12">
+                @using (Html.BeginForm("ExportJson", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @id = "form_upload", @class = "form-inline" }))
+                {
+                    @*@Html.AntiForgeryToken()*@
+                    <div class="form-group">
+                        <label class="float-left mr-2">Tải file: </label>
+                        <input class="float-left" type="file" name="file" id="input_file" />
+                    </div>
+                }
+            </div>
+        }
+
+    </div>
+    <div class="row mt-2">
+        <div class="col-lg-12 ">
+
+            @if (ViewData.Model != null)
+            {
+                using (Html.BeginForm("ProcessData", "Home", FormMethod.Post, new {@id = "form_json" }))
+                {
+                    <div class="wrapper-display-table table-responsive">
+                        <table class="table-sm  table-bordered table-dl" id="table-sl">
+                            <thead>
+                                <tr>
+                                    @foreach (var row in ViewData.Model.Rows)
+                                    {
+                                        foreach (var column in ViewData.Model.Columns)
+                                        {
+                                            <th>@row[column]</th>
+                                        }
+                                        break;
+                                    }
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach (var col in ViewData.Model.Columns)
+                                    {
+                                        <td>
+                                            @Html.DropDownList(col.ColumnName as string, ViewBag.Select as SelectList, string.Empty, new {@class="sl-name" })
+                                        </td>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" id="btn_submit_process" class="float-right btn btn-primary mt-4">Xuat file</button>
+                }
+
+
+                
+            }
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            @if (TempData["Json"] != null)
+            {
+                <div class="scroll-view">
+                    <pre>@TempData["Json"]</pre>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

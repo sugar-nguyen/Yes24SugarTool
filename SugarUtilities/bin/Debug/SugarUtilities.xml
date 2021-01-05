@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SugarUtilities</name>
+    </assembly>
+    <members>
+        <member name="T:SugarUtilities.ExcelRepos">
+            <summary>
+            Xử lý tác vụ liên quan đến excel
+            </summary>
+        </member>
+        <member name="M:SugarUtilities.ExcelRepos.ReadFile(System.String,System.String)">
+            <summary>
+            Đọc file và trả dữ liệu về dạng datatable
+            </summary>
+            <param name="filePath">đường dẫn file</param>
+            <param name="sheetName">Tên của excel sheet</param>
+            <returns>DataTable</returns>
+        </member>
+        <member name="T:SugarUtilities.Global">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SugarUtilities.Global.ExcelDirectory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SugarUtilities.Global.JsonDirectory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SugarUtilities.JsonRepos">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SugarUtilities.JsonRepos.ConvertFromDataTable(System.Data.DataTable)">
+            <summary>
+            
+            </summary>
+            <param name="table"></param>
+            <returns>json string</returns>
+        </member>
+        <member name="M:SugarUtilities.JsonRepos.JsonPrettify(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="json"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

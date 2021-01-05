@@ -21,7 +21,8 @@ namespace ExportJsonFromExcel.Controllers
         {
             return Content("Please comeback later.");
         }
-        public ViewResult ExportJson()
+        [HttpGet]
+        public ActionResult ExportJson()
         {
             if(Request["clearcache"] != null)
             {
@@ -32,12 +33,19 @@ namespace ExportJsonFromExcel.Controllers
             return View();
         }
 
+
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult ExportJson(HttpPostedFileBase file)
         {
             try
             {
+                if (System.IO.Path.GetExtension(file.FileName) != ".xlsx")
+                {
+                    ModelState.AddModelError("", "File không hợp lệ.");
+                    return View();
+                }
+
                 string filePath = System.IO.Path.Combine(HostingEnvironment.MapPath(Global.ExcelDirectory), file.FileName);
                 file.SaveAs(filePath);
 
@@ -60,7 +68,8 @@ namespace ExportJsonFromExcel.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProcessData(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult SubmitSelectedColumn(FormCollection collection)
         {
             System.Web.Caching.Cache _Cache = HttpContext.Cache;
 

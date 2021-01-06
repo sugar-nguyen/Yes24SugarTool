@@ -20,5 +20,9 @@ namespace SugarUtilities
         /// 
         /// </summary>
         public static string JsonDirectory = ConfigurationManager.AppSettings["JsonDirectory"];
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string ImagesDirectory = ConfigurationManager.AppSettings["ImagesDirectory"];
     }
 }

@@ -29,6 +29,11 @@ namespace ExportJsonFromExcel
            "Home/SubmitSelectedColumn/{id}",
            new { controller = "Home", action = "SubmitSelectedColumn", id = UrlParameter.Optional }, new[] { "ExportJsonFromExcel.Controllers" }
            );
+            routes.MapRoute(
+           "Yes24-linhduong-tool-download-json",
+           "export-json/download",
+           new { controller = "Home", action = "DownloadJson", id = UrlParameter.Optional }, new[] { "ExportJsonFromExcel.Controllers" }
+           );
         }
     }
 }

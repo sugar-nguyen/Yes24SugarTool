@@ -10,7 +10,7 @@ using System.Data;
 
 namespace ExportJsonFromExcel.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private const string DataTableCacheName = "DataExcelCache";
         public HomeController()
@@ -24,7 +24,7 @@ namespace ExportJsonFromExcel.Controllers
         [HttpGet]
         public ActionResult ExportJson()
         {
-            if(Request["clearcache"] != null)
+            if (Request["clearcache"] != null)
             {
 
                 System.Web.Caching.Cache _Cache = HttpContext.Cache;
@@ -56,7 +56,7 @@ namespace ExportJsonFromExcel.Controllers
                 _Cache.Insert(DataTableCacheName, dataTable, null, DateTime.Now.AddMinutes(60), TimeSpan.Zero);
 
                 ViewData.Model = dataTable;
-
+                TempData["ShowModal"] = false;
                 ViewBag.Select = new SelectList(JsonObjectCustom.GetAllProperties(), "Key", "Value", "");
             }
             catch (Exception)
@@ -104,17 +104,21 @@ namespace ExportJsonFromExcel.Controllers
 
                     dt.Rows[0].Delete();
                     dt.AcceptChanges();
+                    string json = JsonRepos.JsonPrettify(JsonRepos.ConvertFromDataTable(dt));
+                    TempData["Json"] = json;
 
-                    TempData["Json"] = JsonRepos.JsonPrettify(JsonRepos.ConvertFromDataTable(dt));
-
-                    //  System.IO.File.WriteAllText(System.IO.Path.Combine(HostingEnvironment.MapPath(Global.JsonDirectory), "Output.json"), json);
-
+                    System.IO.File.WriteAllText(System.IO.Path.Combine(HostingEnvironment.MapPath(Global.JsonDirectory), "Output.json"), json);
 
                 }
 
             }
-
+            TempData["ShowModal"] = false;
             return RedirectToAction("ExportJson");
+        }
+
+        public FileResult DownloadJson()
+        {
+            return DownLoadJsonFile(System.IO.Path.Combine(HostingEnvironment.MapPath(Global.JsonDirectory), "Output.json"));
         }
     }
 }

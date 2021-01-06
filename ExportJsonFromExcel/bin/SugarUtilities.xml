@@ -32,6 +32,11 @@
             
             </summary>
         </member>
+        <member name="F:SugarUtilities.Global.ImagesDirectory">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:SugarUtilities.JsonRepos">
             <summary>
             

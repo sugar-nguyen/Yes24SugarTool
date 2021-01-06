@@ -15,7 +15,7 @@ namespace ExportJsonFromExcel.Controllers
             {
                 throw new Exception("Đường dẫn file không hợp lệ.");
             }
-            return File(path,"application/json","Output.json");
+            return File(path,"application/json",string.Concat(DateTime.Now.ToFileTime(),".json"));
         }
     }
 }

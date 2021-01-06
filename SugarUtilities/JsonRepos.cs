@@ -16,9 +16,9 @@ namespace SugarUtilities
     public class JsonRepos
     {
         /// <summary>
-        /// 
+        /// Convert to json from DataTable
         /// </summary>
-        /// <param name="table"></param>
+        /// <param name="table">A DataTable</param>
         /// <returns>json string</returns>
         public static string ConvertFromDataTable(DataTable table)
         {
@@ -28,10 +28,10 @@ namespace SugarUtilities
         }
 
         /// <summary>
-        /// 
+        /// Beauty json format
         /// </summary>
-        /// <param name="json"></param>
-        /// <returns></returns>
+        /// <param name="json">Json string</param>
+        /// <returns>Json string</returns>
         public static string JsonPrettify(string json)
         {
             using (var stringReader = new StringReader(json))

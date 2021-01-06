@@ -40,6 +40,9 @@ namespace ExportJsonFromExcel.Controllers
         {
             try
             {
+
+                TempData["ShowModal"] = false;
+
                 if (System.IO.Path.GetExtension(file.FileName) != ".xlsx")
                 {
                     ModelState.AddModelError("", "File không hợp lệ.");
@@ -56,7 +59,7 @@ namespace ExportJsonFromExcel.Controllers
                 _Cache.Insert(DataTableCacheName, dataTable, null, DateTime.Now.AddMinutes(60), TimeSpan.Zero);
 
                 ViewData.Model = dataTable;
-                TempData["ShowModal"] = false;
+
                 ViewBag.Select = new SelectList(JsonObjectCustom.GetAllProperties(), "Key", "Value", "");
             }
             catch (Exception)
@@ -104,10 +107,13 @@ namespace ExportJsonFromExcel.Controllers
 
                     dt.Rows[0].Delete();
                     dt.AcceptChanges();
+
                     string json = JsonRepos.JsonPrettify(JsonRepos.ConvertFromDataTable(dt));
                     TempData["Json"] = json;
 
-                    System.IO.File.WriteAllText(System.IO.Path.Combine(HostingEnvironment.MapPath(Global.JsonDirectory), "Output.json"), json);
+                    string fileName = DateTime.Now.ToString("ddMMyyyyhhmmss") + ".json";
+                    TempData["Filename"] = fileName;
+                    System.IO.File.WriteAllText(System.IO.Path.Combine(HostingEnvironment.MapPath(Global.JsonDirectory), fileName), json);
 
                 }
 
@@ -116,9 +122,9 @@ namespace ExportJsonFromExcel.Controllers
             return RedirectToAction("ExportJson");
         }
 
-        public FileResult DownloadJson()
+        public FileResult DownloadJson(string file)
         {
-            return DownLoadJsonFile(System.IO.Path.Combine(HostingEnvironment.MapPath(Global.JsonDirectory), "Output.json"));
+            return DownLoadJsonFile(System.IO.Path.Combine(HostingEnvironment.MapPath(Global.JsonDirectory), file));
         }
     }
 }

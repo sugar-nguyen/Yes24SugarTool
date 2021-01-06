@@ -98,6 +98,8 @@
         input[type=file] {
             font-size: 12px;
         }
+
+       
     </style>
 }
 @section scripts{
@@ -106,7 +108,7 @@
             var showModal = '@TempData["ShowModal"]';
 
             if (showModal === '') $('.modal-huongdan').modal('show');
-            
+
 
             $('#input_file').change(function () {
                 $('#form_upload').submit();
@@ -153,8 +155,11 @@
         })
 
         function download() {
+            try {
+               window.location.href = '/export-json/download?file=' + '@Html.Raw(TempData["FileName"])';
+            } catch (e) {
 
-            window.location.href = '/export-json/download';
+            }
         }
     </script>
 }
@@ -193,7 +198,6 @@
 
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <label class="float-left mr-2">Tải file: </label>
                             <input class="float-left" type="file" name="file" id="input_file" />
                         </div>
 

@@ -44,17 +44,17 @@
         </member>
         <member name="M:SugarUtilities.JsonRepos.ConvertFromDataTable(System.Data.DataTable)">
             <summary>
-            
+            Convert to json from DataTable
             </summary>
-            <param name="table"></param>
+            <param name="table">A DataTable</param>
             <returns>json string</returns>
         </member>
         <member name="M:SugarUtilities.JsonRepos.JsonPrettify(System.String)">
             <summary>
-            
+            Beauty json format
             </summary>
-            <param name="json"></param>
-            <returns></returns>
+            <param name="json">Json string</param>
+            <returns>Json string</returns>
         </member>
     </members>
 </doc>

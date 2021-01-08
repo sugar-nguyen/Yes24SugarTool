@@ -48,6 +48,18 @@ namespace ExportJsonFromExcel.Controllers
                     ModelState.AddModelError("", "File không hợp lệ.");
                     return View();
                 }
+                try
+                {
+                    if (!System.IO.Directory.Exists(HostingEnvironment.MapPath(Global.ExcelDirectory)))
+                    {
+                        System.IO.Directory.CreateDirectory(HostingEnvironment.MapPath(Global.ExcelDirectory));
+                    }
+                }
+                catch 
+                {
+
+                    throw new Exception("Lỗi khi khởi tạo đường dẫn.");
+                }
 
                 string filePath = System.IO.Path.Combine(HostingEnvironment.MapPath(Global.ExcelDirectory), file.FileName);
                 file.SaveAs(filePath);
@@ -113,6 +125,20 @@ namespace ExportJsonFromExcel.Controllers
 
                     string fileName = DateTime.Now.ToString("ddMMyyyyhhmmss") + ".json";
                     TempData["Filename"] = fileName;
+
+                    try
+                    {
+                        if (!System.IO.Directory.Exists(HostingEnvironment.MapPath(Global.JsonDirectory)))
+                        {
+                            System.IO.Directory.CreateDirectory(HostingEnvironment.MapPath(Global.JsonDirectory));
+                        }
+                    }
+                    catch
+                    {
+
+                        throw new Exception("Lỗi khi khởi tạo đường dẫn.");
+                    }
+
                     System.IO.File.WriteAllText(System.IO.Path.Combine(HostingEnvironment.MapPath(Global.JsonDirectory), fileName), json);
 
                 }

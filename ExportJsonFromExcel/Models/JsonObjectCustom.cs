@@ -20,22 +20,26 @@ namespace ExportJsonFromExcel.Models
         public string Detail { get; set; }
         public string GiftName { get; set; }
         public string Link { get; set; }
+        public string FixedPrice { get; set; }
+        public string SalePrice { get; set; }
 
         public static Dictionary<string, string> GetAllProperties()
         {
             return new Dictionary<string, string>() {
                 {"Day","Day" },
-                {"SerialCode","SerialCode" },
+                {"SerialCode","Serial Code" },
                 {"SerialName","Serial Name" },
                 {"Code","Code" },
                 {"Hour","Hour" },
                 { "Qty","Qty"},
-                {"ProductName","ProductName" },
+                {"ProductName","Product Name" },
                 {"Brand","Brand" },
                 {"Type","Type" },
                 {"Detail","Detail" },
-                {"GiftName","GiftName" },
-                {"Link","Link" }
+                {"GiftName","Gift Name" },
+                {"Link","Link" },
+                 {"FixedPrice","Fixed Price" },
+                 {"SalePrice","Sale Price" }
             };
         }
     }

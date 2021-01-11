@@ -65,7 +65,7 @@ namespace ExportJsonFromExcel.Extensions
 
         private static void PopulateNode(SiteMapNode siteMapNode, XmlNode xmlNode)
         {
-            string domain = "";
+            string domain;
             if (HttpContext.Current.Request.Url.AbsoluteUri.Contains("192.168"))
             {
                 domain = Global.DomainIP;

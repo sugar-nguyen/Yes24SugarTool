@@ -9,13 +9,35 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <style>
+        .wrapper {
+            padding: 20px;
+        }
+
+        .module {
+            padding: 0;
+        }
+
+            .module li {
+                margin-bottom: 5px;
+                font-size: 18px;
+                background: #eaeaea;
+                padding: 3px;
+                list-style: none;
+            }
+
+                .module li > a {
+                    text-decoration: none;
+                }
+    </style>
 </head>
 <body>
-    <div>
-        <ul>
+    <div class="wrapper">
+        <h1>Menu</h1>
+        <ul class="module">
             @{
                 var siteMap = new ExportJsonFromExcel.Extensions.XmlSiteMap();
-                siteMap.LoadFrom(System.IO.Path.Combine(Global.ConfigDirectory,"Modules.config"));
+                siteMap.LoadFrom(System.IO.Path.Combine(Global.ConfigDirectory, "Modules.config"));
 
                 var rootNode = siteMap.RootNode;
             }

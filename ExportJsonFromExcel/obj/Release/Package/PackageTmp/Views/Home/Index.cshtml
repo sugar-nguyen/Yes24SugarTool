@@ -1,0 +1,37 @@
+﻿@using SugarUtilities
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <ul>
+            @{
+                var siteMap = new ExportJsonFromExcel.Extensions.XmlSiteMap();
+                siteMap.LoadFrom(System.IO.Path.Combine(Global.ConfigDirectory,"Modules.config"));
+
+                var rootNode = siteMap.RootNode;
+            }
+
+            @helper RenderMenuItem(ExportJsonFromExcel.Extensions.SiteMapNode item)
+            {
+                <li>
+                    <a href="@item.route">@item.name</a>
+                </li>
+            }
+
+            @foreach (var item in rootNode.ChildNodes)
+            {
+                @RenderMenuItem(item)
+            }
+        </ul>
+    </div>
+</body>
+</html>

@@ -24,5 +24,17 @@ namespace SugarUtilities
         /// 
         /// </summary>
         public static string ImagesDirectory = ConfigurationManager.AppSettings["ImagesDirectory"];
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string DomainName = ConfigurationManager.AppSettings["Domain"];
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string DomainIP = ConfigurationManager.AppSettings["DomainIP"];
+        /// <summary>
+        /// 
+        /// </summary>
+        public static string ConfigDirectory = ConfigurationManager.AppSettings["ConfigDirectory"];
     }
 }

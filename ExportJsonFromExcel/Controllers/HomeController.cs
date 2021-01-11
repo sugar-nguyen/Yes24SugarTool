@@ -19,8 +19,10 @@ namespace ExportJsonFromExcel.Controllers
         }
         public ActionResult Index()
         {
-            return Content("Please comeback later.");
+           return View();
         }
+
+        #region export json
         [HttpGet]
         public ActionResult ExportJson()
         {
@@ -152,5 +154,7 @@ namespace ExportJsonFromExcel.Controllers
         {
             return DownLoadJsonFile(System.IO.Path.Combine(HostingEnvironment.MapPath(Global.JsonDirectory), file));
         }
+
+        #endregion
     }
 }

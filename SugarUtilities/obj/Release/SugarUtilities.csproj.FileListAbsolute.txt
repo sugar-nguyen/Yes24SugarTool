@@ -1,0 +1,14 @@
+D:\duog\my_project\Yes24SugarTool\SugarUtilities\bin\Release\SugarUtilities.dll
+D:\duog\my_project\Yes24SugarTool\SugarUtilities\bin\Release\SugarUtilities.pdb
+D:\duog\my_project\Yes24SugarTool\SugarUtilities\bin\Release\EPPlus.dll
+D:\duog\my_project\Yes24SugarTool\SugarUtilities\bin\Release\Microsoft.IO.RecyclableMemoryStream.dll
+D:\duog\my_project\Yes24SugarTool\SugarUtilities\bin\Release\Newtonsoft.Json.dll
+D:\duog\my_project\Yes24SugarTool\SugarUtilities\bin\Release\System.ComponentModel.Annotations.dll
+D:\duog\my_project\Yes24SugarTool\SugarUtilities\bin\Release\EPPlus.xml
+D:\duog\my_project\Yes24SugarTool\SugarUtilities\bin\Release\Microsoft.IO.RecyclableMemoryStream.xml
+D:\duog\my_project\Yes24SugarTool\SugarUtilities\bin\Release\Newtonsoft.Json.xml
+D:\duog\my_project\Yes24SugarTool\SugarUtilities\obj\Release\SugarUtilities.csprojAssemblyReference.cache
+D:\duog\my_project\Yes24SugarTool\SugarUtilities\obj\Release\SugarUtilities.csproj.CoreCompileInputs.cache
+D:\duog\my_project\Yes24SugarTool\SugarUtilities\obj\Release\SugarUtilities.csproj.CopyComplete
+D:\duog\my_project\Yes24SugarTool\SugarUtilities\obj\Release\SugarUtilities.dll
+D:\duog\my_project\Yes24SugarTool\SugarUtilities\obj\Release\SugarUtilities.pdb

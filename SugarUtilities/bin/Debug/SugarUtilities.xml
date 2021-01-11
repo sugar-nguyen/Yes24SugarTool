@@ -37,6 +37,21 @@
             
             </summary>
         </member>
+        <member name="F:SugarUtilities.Global.DomainName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SugarUtilities.Global.DomainIP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:SugarUtilities.Global.ConfigDirectory">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:SugarUtilities.JsonRepos">
             <summary>
             

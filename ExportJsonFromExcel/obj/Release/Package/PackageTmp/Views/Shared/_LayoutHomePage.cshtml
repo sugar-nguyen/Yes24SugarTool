@@ -1,0 +1,33 @@
+﻿@{ 
+    ViewBag.Title = "Export json file";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    
+    @RenderSection("style", false)
+<style>
+    span.navbar-brand:hover{
+        color:unset !important;
+    }
+</style>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-light" style=" background: linear-gradient(166deg, rgba(49,93,171,1) 0%, rgba(122,111,228,1) 92%);user-select:none;-ms-user-select:none">
+        <span class="navbar-brand mb-0 h1" style="color: #fff !important; text-transform:uppercase;">@ViewBag.Header</span>
+    </nav>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+
+    @RenderSection("modal",false)
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

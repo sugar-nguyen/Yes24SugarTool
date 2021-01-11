@@ -1,0 +1,275 @@
+﻿
+@{
+    ViewBag.Header = "Export json from excel sheet";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+
+@section style{
+
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+        @@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            margin-top: 20px;
+            box-sizing: border-box;
+        }
+
+        .table-dl th,
+        .table-dl td {
+            font-size: 12px;
+        }
+
+        .table-dl td {
+            padding: 10px;
+        }
+
+        .table-dl th {
+            background: #464858;
+            color: #fff;
+            text-align: center;
+        }
+
+        .wrapper-display-table {
+            padding: 10px;
+        }
+
+        .scroll-view {
+            margin-top: 20px;
+            height: 700px;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #999999;
+            padding: 10px 0 10px 10px;
+            background: #fff;
+            border-radius: 10px;
+        }
+
+            .scroll-view pre {
+                font-size: 13px;
+                color: #000;
+                font-family: 'Source Code Pro', monospace;
+                cursor: text;
+            }
+
+            .scroll-view .box-content {
+                height: 100%;
+                width: 100%;
+                overflow: auto;
+            }
+
+        span.error {
+            position: absolute;
+            top: 32%;
+            background: red;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 20px;
+            padding: 2px 6px;
+            line-height: normal;
+            font-family: ui-monospace;
+            box-shadow: 2px 2px 6px 1px #000;
+        }
+
+            span.error:before {
+                content: "";
+                position: absolute;
+                left: 1%;
+                top: 83%;
+                width: 0;
+                height: 0;
+                border-left: 0px solid transparent;
+                border-right: 12px solid transparent;
+                border-top: 8px solid red;
+                clear: both;
+            }
+
+        .validation-summary-errors ul li {
+            font-size: 12px;
+            color: red;
+        }
+
+        input[type=file] {
+            font-size: 12px;
+        }
+
+       
+    </style>
+}
+@section scripts{
+    <script>
+        $(function () {
+            var showModal = '@TempData["ShowModal"]';
+
+            if (showModal === '') $('.modal-huongdan').modal('show');
+
+
+            $('#input_file').change(function () {
+                $('#form_upload').submit();
+            });
+
+            $('.sl-name').change(function () {
+                var sl = $(this);
+
+                var table = $('#table-sl');
+                //var selects = table.find('tbody tr td select.sl-name option[value="' + sl.val() + '"]').not(':selected');
+                //$.each(selects, function (key, item) {
+                //    $(item).remove();
+                //})
+
+                var array = Array.from(table.find('tbody tr td select.sl-name').not(this)).map(x => $(x).val());
+
+                if (sl.val() !== '') {
+
+                    if (array.includes(sl.val())) {
+                        sl.parent().find('span.error').remove();
+                        sl.parent().append("<span class='error'>Tên cột đã được chọn.</span>");
+                    } else {
+
+                        sl.parent().find('span.error').remove();
+                    }
+
+                } else {
+                    sl.parent().find('span.error').remove();
+                }
+            });
+
+            $('#btn_submit_process').click(function () {
+                var table = $('#table-sl');
+                if (table.find('tbody tr td span.error').length > 0) {
+                    return;
+                }
+
+                var array = Array.from(table.find('tbody tr td select.sl-name')).map(x => $(x).val());
+                if (array.every(x => x === '')) {
+                    return;
+                }
+                $('#form_json').submit();
+            });
+        })
+
+        function download() {
+            try {
+               window.location.href = '/export-json/download?file=' + '@Html.Raw(TempData["FileName"])';
+            } catch (e) {
+
+            }
+        }
+    </script>
+}
+
+@section modal{
+    <div class="modal fade modal-huongdan" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="padding: 20px 25px">
+                <div class="row w-100">
+                    <div class="col-sm-12 border-bottom border-dark">
+                        <span class="h5">&#187;&nbsp;Định dạng file excel hợp lệ</span>
+                    </div>
+                </div>
+                <div class="row w-100 mt-3">
+                    <div class="col-sm-12">
+                        <img src="~/Content/excel-example-121230928412.png" alt="" class="img-fluid" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+<div class="wrapper">
+
+    @if (ViewData.Model == null)
+    {
+        <div class="row">
+
+            <div class="col-lg-12">
+                @using (Html.BeginForm("ExportJson", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @id = "form_upload", @class = "form-inline" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input class="float-left" type="file" name="file" id="input_file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                        </div>
+
+                    </div>
+                    <div class="row w-100">
+                        <div class="col-sm-12"> @Html.ValidationSummary(true)</div>
+
+                    </div>
+
+                }
+            </div>
+
+
+        </div>
+    }
+    else
+    {
+
+        <div class="row mt-2">
+            <div class="col-lg-12 ">
+                <span style=" margin-left: 10px; font-size: 14px; text-decoration: underline;">&#187;&nbsp;Chọn cột cần lấy</span>
+                @using (Html.BeginForm("SubmitSelectedColumn", "Home", FormMethod.Post, new { @id = "form_json" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="wrapper-display-table table-responsive">
+
+                        <table class="table-sm  table-bordered table-dl" id="table-sl">
+                            <thead>
+                                <tr>
+                                    @foreach (var row in ViewData.Model.Rows)
+                                    {
+                                        foreach (var column in ViewData.Model.Columns)
+                                        {
+                                            <th>@row[column]</th>
+                                        }
+                                        break;
+                                    }
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach (var col in ViewData.Model.Columns)
+                                    {
+                                        <td>
+                                            @Html.DropDownList(col.ColumnName as string, ViewBag.Select as SelectList, string.Empty, new { @class = "sl-name" })
+                                        </td>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" id="btn_submit_process" class="float-right btn btn-outline-dark mt-4">Xuất File</button>
+                }
+
+            </div>
+        </div>
+    }
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            @if (TempData["Json"] != null)
+            {
+                <div class="scroll-view">
+                    <div class="box-content">
+                        <pre>@TempData["Json"]</pre>
+                    </div>
+                </div>
+                <button class="btn btn-outline-success mt-2 float-right" onclick="download()">Tải file</button>
+            }
+
+        </div>
+    </div>
+</div>

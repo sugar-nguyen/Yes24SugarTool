@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Header = "Export Product code to one line with comma";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+}
+
+@section style{
+    <style>
+        tbody td {
+            padding: 5px;
+            position: relative;
+        }
+
+            tbody td.td-stt {
+                width: 5px;
+                text-align: center;
+            }
+
+        table tbody td .product-code-ori,
+        table tbody td .product-code-after {
+            width: 100%;
+            padding: 0 5px;
+        }
+
+        .btn-clear {
+            position: absolute;
+            border: 0;
+            font-size: 11px;
+            background: none;
+            left: 96%;
+            font-size: 14px;
+            top: 17%;
+            transition: 0.5s all linear;
+            visibility: hidden;
+        }
+
+            .btn-clear:hover, .btn-clear:active, .btn-clear:focus {
+                outline: none;
+                border: none;
+            }
+
+        input.product-code-ori:focus + .btn-clear {
+            visibility: visible;
+        }
+    </style>
+}
+@section scripts{
+    <script>
+        $(function () {
+
+
+            $('button.btn-clear').click(function () {
+                $(this).parent().children('input').val('').change();
+            })
+
+            $('.product-code-ori').change(function () {
+                var input = $(this);
+                var value = input.val();
+
+                $.ajax({
+                    url: '/Home/ProductCodeResult',
+                    type: 'GET',
+                    data: { code: value },
+                    success: function (code) {
+                        input.closest('tr').find('td input.product-code-after').val(code);
+                    },
+                    error: function (err) {
+                        console.log(err.responseText);
+                    }
+                })
+
+            })
+        })
+
+
+    </script>
+}
+
+<div class="wrapper">
+    <table class="w-100">
+        <tbody>
+            <tr>
+                <td>&nbsp;</td>
+                <td class="text-center">Product code</td>
+                <td class="text-center">Kết quả</td>
+            </tr>
+
+            @for (int i = 1; i <= 12; i++)
+            {
+                <tr>
+                    <td class="td-stt">@i</td>
+                    <td class="td-first">
+                        <input type="text" name="ip-td-1-@i" value="" class="product-code-ori" />
+                        <button class="btn-clear">x</button>
+                    </td>
+                    <td>
+                        <input type="text" name="ip-td-2-@i" value="" class="product-code-after" />
+                    </td>
+
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+</div>

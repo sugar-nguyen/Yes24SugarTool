@@ -1,5 +1,5 @@
-﻿@{ 
-    ViewBag.Title = "Export json file";
+﻿@{
+    ViewBag.Title = "Yes24 Linh Duong Tool";
 }
 <!DOCTYPE html>
 
@@ -8,13 +8,27 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+        @@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            margin-top: 20px;
+            box-sizing: border-box;
+        }
+
+        span.navbar-brand:hover {
+            color: unset !important;
+        }
+    </style>
     @RenderSection("style", false)
-<style>
-    span.navbar-brand:hover{
-        color:unset !important;
-    }
-</style>
+
 </head>
 <body class="bg-light">
     <nav class="navbar navbar-light" style=" background: linear-gradient(166deg, rgba(49,93,171,1) 0%, rgba(122,111,228,1) 92%);user-select:none;-ms-user-select:none">
@@ -24,7 +38,7 @@
         @RenderBody()
     </div>
 
-    @RenderSection("modal",false)
+    @RenderSection("modal", false)
     <script src="~/Scripts/jquery-3.5.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>

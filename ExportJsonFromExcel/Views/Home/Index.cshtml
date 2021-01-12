@@ -24,10 +24,18 @@
                 background: #eaeaea;
                 padding: 3px;
                 list-style: none;
+                transition:0.3s all linear;
             }
+
 
                 .module li > a {
                     text-decoration: none;
+                    display:block;
+                    width:100%;
+                    height:100%;
+                    user-select:none;
+                    -ms-user-select:none;
+                    color:#000;
                 }
     </style>
 </head>
@@ -45,7 +53,7 @@
             @helper RenderMenuItem(ExportJsonFromExcel.Extensions.SiteMapNode item)
             {
                 <li>
-                    <a href="@item.route">@item.name</a>
+                    <a href="@item.route" title="Click me please 🙄">@item.name</a>
                 </li>
             }
 

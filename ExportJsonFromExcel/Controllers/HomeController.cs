@@ -19,7 +19,7 @@ namespace ExportJsonFromExcel.Controllers
         }
         public ActionResult Index()
         {
-           return View();
+            return View();
         }
 
         #region export json
@@ -57,7 +57,7 @@ namespace ExportJsonFromExcel.Controllers
                         System.IO.Directory.CreateDirectory(HostingEnvironment.MapPath(Global.ExcelDirectory));
                     }
                 }
-                catch 
+                catch
                 {
 
                     throw new Exception("Lỗi khi khởi tạo đường dẫn.");
@@ -150,11 +150,28 @@ namespace ExportJsonFromExcel.Controllers
             return RedirectToAction("ExportJson");
         }
 
+        #endregion
+
+        #region export product code to one line
+        public ViewResult ExportProductCode()
+        {
+            return View();
+        }
+        public JsonResult ProductCodeResult(string code)
+        {
+            if (string.IsNullOrEmpty(code) || string.IsNullOrWhiteSpace(code))
+            {
+                return Json(code, JsonRequestBehavior.AllowGet);
+            }
+            return Json(code.Replace(" ",","),JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region download
         public FileResult DownloadJson(string file)
         {
             return DownLoadJsonFile(System.IO.Path.Combine(HostingEnvironment.MapPath(Global.JsonDirectory), file));
         }
-
         #endregion
     }
 }

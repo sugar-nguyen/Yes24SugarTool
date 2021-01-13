@@ -163,7 +163,21 @@ namespace ExportJsonFromExcel.Controllers
             {
                 return Json(code, JsonRequestBehavior.AllowGet);
             }
-            return Json(code.Replace(" ",","),JsonRequestBehavior.AllowGet);
+
+            char[] arr = new char[code.Length];
+
+            int j = 0;
+            for (int i = 0; i < code.Length; i++)
+            {
+                while (char.IsWhiteSpace(code[i]) && char.IsWhiteSpace(code[i + 1]))
+                {
+                    i++;
+                }
+                arr[j] = code[i];
+                j++;
+            }
+
+            return Json((new string(arr)).Replace(" ", ","), JsonRequestBehavior.AllowGet);
         }
         #endregion
 

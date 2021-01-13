@@ -22,6 +22,7 @@ namespace ExportJsonFromExcel.Models
         public string Link { get; set; }
         public string FixedPrice { get; set; }
         public string SalePrice { get; set; }
+        public string Image { get; set; }
 
         public static Dictionary<string, string> GetAllProperties()
         {
@@ -38,8 +39,9 @@ namespace ExportJsonFromExcel.Models
                 {"Detail","Detail" },
                 {"GiftName","Gift Name" },
                 {"Link","Link" },
-                 {"FixedPrice","Fixed Price" },
-                 {"SalePrice","Sale Price" }
+                {"FixedPrice","Fixed Price" },
+                {"SalePrice","Sale Price" },
+                {"Image","Image" }
             };
         }
     }

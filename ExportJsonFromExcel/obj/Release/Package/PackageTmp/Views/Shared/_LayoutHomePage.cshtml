@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Yes24 Linh Duong Tool";
+    ViewBag.Title = "Yes24 Event Tools";
 }
 <!DOCTYPE html>
 
@@ -32,7 +32,15 @@
 </head>
 <body class="bg-light">
     <nav class="navbar navbar-light" style=" background: linear-gradient(166deg, rgba(49,93,171,1) 0%, rgba(122,111,228,1) 92%);user-select:none;-ms-user-select:none">
-        <span class="navbar-brand mb-0 h1" style="color: #fff !important; text-transform:uppercase;">@ViewBag.Header</span>
+        <div class="navbar-brand">
+            <a class=" h3 text-light text-uppercase text-decoration-none" href="@Url.Action("Index","Home")" title="Home">
+                <img class="d-inline-block align-top" src="https://www.flaticon.com/svg/vstatic/svg/553/553416.svg?token=exp=1610614642~hmac=49cc94584781a7281664f7987708a73b" alt="Home" width="30" height="30"/>
+            </a>
+            <span class="text-light text-uppercase h3 ">
+                @ViewBag.Header
+            </span>
+        </div>
+
     </nav>
     <div class="container-fluid">
         @RenderBody()

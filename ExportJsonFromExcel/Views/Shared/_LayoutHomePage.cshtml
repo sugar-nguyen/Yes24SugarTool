@@ -7,7 +7,9 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link rel="icon" href="~/Content/tools_Evf_icon.ico">
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
     <style>
         @@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
         @@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
@@ -33,17 +35,14 @@
 <body class="bg-light">
     <nav class="navbar navbar-light" style=" background: linear-gradient(166deg, rgba(49,93,171,1) 0%, rgba(122,111,228,1) 92%);user-select:none;-ms-user-select:none">
         <div class="navbar-brand">
-            <a class=" h3 text-light text-uppercase text-decoration-none" href="@Url.Action("Index","Home")" title="Home">
-                <img class="d-inline-block align-top" src="https://www.flaticon.com/svg/vstatic/svg/553/553416.svg?token=exp=1610614642~hmac=49cc94584781a7281664f7987708a73b" alt="Home" width="30" height="30"/>
+            <a class=" h3 text-light text-uppercase text-decoration-none d-inline-block m-0" href="@Url.Action("Index","Home")" title="Home">
+                <i class="fa fa-home h3 m-0"></i>
             </a>
-            <span class="text-light text-uppercase h3 ">
+            <span class="text-light text-uppercase h4 d-inline-block m-0">
                 @ViewBag.Header
             </span>
         </div>
-        @*<a class=" h3 text-light text-uppercase" href="@Url.Action("Index","Home")">
-            <img class="d-inline-block align-top" src="https://www.flaticon.com/svg/vstatic/svg/553/553416.svg?token=exp=1610614642~hmac=49cc94584781a7281664f7987708a73b" alt="Home" width="30" />
-         
-        </a>*@
+
     </nav>
     <div class="container-fluid">
         @RenderBody()

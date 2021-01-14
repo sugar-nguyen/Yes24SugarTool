@@ -14,11 +14,13 @@ namespace ExportJsonFromExcel
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-               name: "Default",
-               url: "",
-               defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-           );
+              name: "Default Home Page",
+              url: "",
+              defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+              namespaces: new[] { "ExportJsonFromExcel.Controllers" }
+          );
 
+          
             routes.MapRoute(
             "Yes24-linhduong-tool-export-json",
             "export-json",
@@ -44,6 +46,13 @@ namespace ExportJsonFromExcel
              "Home/ProductCodeResult/{id}",
              new { controller = "Home", action = "ProductCodeResult", id = UrlParameter.Optional }, new[] { "ExportJsonFromExcel.Controllers" }
              );
+
+            routes.MapRoute(
+              name: "Default",
+              url: "{controller}/{action}/{id}",
+              defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+              namespaces: new[] { "ExportJsonFromExcel.Controllers" }
+          );
         }
     }
 }

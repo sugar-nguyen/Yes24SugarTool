@@ -42,12 +42,6 @@ namespace ExportJsonFromExcel
           new { controller = "Home", action = "ExportProductCode", id = UrlParameter.Optional }, new[] { "ExportJsonFromExcel.Controllers" }
           );
             routes.MapRoute(
-             "Yes24-linhduong-tool-export-product-code-to-one-line-process",
-             "Home/ProductCodeResult/{id}",
-             new { controller = "Home", action = "ProductCodeResult", id = UrlParameter.Optional }, new[] { "ExportJsonFromExcel.Controllers" }
-             );
-
-            routes.MapRoute(
               name: "Default",
               url: "{controller}/{action}/{id}",
               defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },

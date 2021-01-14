@@ -231,7 +231,7 @@
                                     @foreach (var col in ViewData.Model.Columns)
                                     {
                                         <td>
-                                            @Html.DropDownList(col.ColumnName as string, ViewBag.Select as SelectList, string.Empty, new { @class = "sl-name" })
+                                            @Html.DropDownList(col.ColumnName as string, ViewBag.Select as SelectList, string.Empty, new { @class = "sl-name form-control" })
                                         </td>
                                     }
                                 </tr>
